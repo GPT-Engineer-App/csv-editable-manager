@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
 import { useTable, usePagination } from 'react-table';
-import { FaPlus, FaTrash, FaDownload } from 'react-icons.fa';
+import { FaPlus, FaTrash, FaDownload } from 'react-icons/fa';
 import Header from './components/Header';
 
 function App() {
