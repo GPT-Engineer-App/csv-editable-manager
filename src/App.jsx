@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Papa from 'papaparse';
 import { useTable, usePagination } from 'react-table';
 import { FaPlus, FaTrash, FaDownload } from 'react-icons/fa';
+import Header from './components/Header';
 
 function App() {
   const [data, setData] = useState([]);
@@ -58,55 +59,58 @@ function App() {
   );
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">CSV Upload and Edit Tool</h1>
-      <input type="file" accept=".csv" onChange={handleFileUpload} className="mb-4" />
-      <button onClick={handleAddRow} className="btn btn-primary mb-4">
-        <FaPlus /> Add Row
-      </button>
-      <button onClick={handleDownload} className="btn btn-secondary mb-4">
-        <FaDownload /> Download CSV
-      </button>
-      <table {...getTableProps()} className="table-auto w-full mb-4">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()} className="px-4 py-2 border">{column.render('Header')}</th>
-              ))}
-              <th className="px-4 py-2 border">Actions</th>
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} className="px-4 py-2 border">
-                    <input
-                      value={cell.value}
-                      onChange={(e) => {
-                        const newData = [...data];
-                        newData[i][cell.column.id] = e.target.value;
-                        setData(newData);
-                      }}
-                      className="w-full"
-                    />
-                  </td>
+    <>
+      <Header />
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-4">CSV Upload and Edit Tool</h1>
+        <input type="file" accept=".csv" onChange={handleFileUpload} className="mb-4" />
+        <button onClick={handleAddRow} className="btn btn-primary mb-4">
+          <FaPlus /> Add Row
+        </button>
+        <button onClick={handleDownload} className="btn btn-secondary mb-4">
+          <FaDownload /> Download CSV
+        </button>
+        <table {...getTableProps()} className="table-auto w-full mb-4">
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()} className="px-4 py-2 border">{column.render('Header')}</th>
                 ))}
-                <td className="px-4 py-2 border">
-                  <button onClick={() => handleRemoveRow(i)} className="btn btn-danger">
-                    <FaTrash />
-                  </button>
-                </td>
+                <th className="px-4 py-2 border">Actions</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()} className="px-4 py-2 border">
+                      <input
+                        value={cell.value}
+                        onChange={(e) => {
+                          const newData = [...data];
+                          newData[i][cell.column.id] = e.target.value;
+                          setData(newData);
+                        }}
+                        className="w-full"
+                      />
+                    </td>
+                  ))}
+                  <td className="px-4 py-2 border">
+                    <button onClick={() => handleRemoveRow(i)} className="btn btn-danger">
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
