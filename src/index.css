@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: #F4A261;
+  --secondary-color: #2A9D8F;
+  --background-color: #FFFFFF;
+  --text-color: #000000;
+  --button-background: #F4A261;
+  --button-text: #FFFFFF;
+  --button-border: #F4A261;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+}
+
+button {
+  background-color: var(--button-background);
+  color: var(--button-text);
+  border: 1px solid var(--button-border);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: var(--button-border);
+  color: var(--button-text);
+}
