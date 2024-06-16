@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaDownload } from 'react-icons/fa';
-import logo from '../public/images/logo.png';
+import logo from '../images/logo.png';
 
 const Header = () => {
   return (
